@@ -80,9 +80,18 @@ namespace PostgresConnection
 
                 //  Custom query
 
-                string addCrew = "insert into movieAssignment (assignmentId, personId, professionId, movieId) values (1, 5, 4, 1)";
-                ExcecuteInsertQuery(addCrew);
-
+                string addGnr = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (1, 1, 1)";
+                string addGnr2 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (2, 2, 3)";
+                string addGnr3 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (3, 2, 5)";
+                string addGnr4 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (4, 3, 1)";
+                string addGnr5 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (5, 4, 4)";
+                string addGnr6 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (6, 5, 7)";
+                ExcecuteInsertQuery(addGnr);
+                ExcecuteInsertQuery(addGnr2);
+                ExcecuteInsertQuery(addGnr3);
+                ExcecuteInsertQuery(addGnr4);
+                ExcecuteInsertQuery(addGnr5);
+                ExcecuteInsertQuery(addGnr6);
             }
             catch (Exception msg)
             {
