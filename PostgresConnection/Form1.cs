@@ -30,19 +30,29 @@ namespace PostgresConnection
                 // Making connection with Npgsql provider
                 NpgsqlConnection conn = new NpgsqlConnection(connstring);
 
+                FileInfo file = new FileInfo("Database/tables.sql");
                 FileInfo file1 = new FileInfo("Database/profession.sql");
                 FileInfo file2 = new FileInfo("Database/person.sql");
                 FileInfo file3 = new FileInfo("Database/genre.sql");
                 FileInfo file4 = new FileInfo("Database/movies.sql");
                 FileInfo file5 = new FileInfo("Database/tvSeries.sql");
 
+                //Loading tables and mock data for basic entities
                 conn.Open();
+
+                //Reading sql from files
+
+                //string sqlTables = file.OpenText().ReadToEnd();
                 //string sqlJobs = file1.OpenText().ReadToEnd();
                 //string sqlPerson = file2.OpenText().ReadToEnd();
                 //string sqlGenre = file3.OpenText().ReadToEnd();
                 //string sqlMovies = file4.OpenText().ReadToEnd();
                 //string sqlTv = file5.OpenText().ReadToEnd();
-                ////// data adapter making request from our connection
+
+                ////// Data adapter making request from our connection
+
+                //NpgsqlCommand createTables = new NpgsqlCommand(sqlTables, conn);
+                //createTables.ExecuteNonQuery();
                 //NpgsqlCommand insertJobs = new NpgsqlCommand(sqlJobs, conn);
                 //insertJobs.ExecuteNonQuery();
                 //NpgsqlCommand insertPerson = new NpgsqlCommand(sqlPerson, conn);
@@ -53,8 +63,9 @@ namespace PostgresConnection
                 //insertMovies.ExecuteNonQuery();
                 //NpgsqlCommand insertTv = new NpgsqlCommand(sqlTv, conn);
                 //insertTv.ExecuteNonQuery();
-                string addCrew = "insert into movieAssignment (assignmentId, personId, professionId, movieId) values (1, 5, 4, 1)";
-                ExcecuteInsertQuery(addCrew);
+
+                //  Gia diavasma kataxoriseon kai provoli sti forma
+
                 //NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql, conn);
                 //// i always reset DataSet before i do
                 //// something with it.... i don't know why :-)
@@ -66,6 +77,12 @@ namespace PostgresConnection
                 ////// connect grid to DataTable
                 //dataGridView1.DataSource = dataTable;
                 conn.Close();
+
+                //  Custom query
+
+                string addCrew = "insert into movieAssignment (assignmentId, personId, professionId, movieId) values (1, 5, 4, 1)";
+                ExcecuteInsertQuery(addCrew);
+
             }
             catch (Exception msg)
             {
