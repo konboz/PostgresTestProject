@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,27 +43,27 @@ namespace PostgresConnection
 
                 //Reading sql from files
 
-                //string sqlTables = file.OpenText().ReadToEnd();
-                //string sqlJobs = file1.OpenText().ReadToEnd();
-                //string sqlPerson = file2.OpenText().ReadToEnd();
-                //string sqlGenre = file3.OpenText().ReadToEnd();
-                //string sqlMovies = file4.OpenText().ReadToEnd();
-                //string sqlTv = file5.OpenText().ReadToEnd();
+                string sqlTables = file.OpenText().ReadToEnd();
+                string sqlJobs = file1.OpenText().ReadToEnd();
+                string sqlPerson = file2.OpenText().ReadToEnd();
+                string sqlGenre = file3.OpenText().ReadToEnd();
+                string sqlMovies = file4.OpenText().ReadToEnd();
+                string sqlTv = file5.OpenText().ReadToEnd();
 
                 ////// Data adapter making request from our connection
 
-                //NpgsqlCommand createTables = new NpgsqlCommand(sqlTables, conn);
-                //createTables.ExecuteNonQuery();
-                //NpgsqlCommand insertJobs = new NpgsqlCommand(sqlJobs, conn);
-                //insertJobs.ExecuteNonQuery();
-                //NpgsqlCommand insertPerson = new NpgsqlCommand(sqlPerson, conn);
-                //insertPerson.ExecuteNonQuery();
-                //NpgsqlCommand insertGenre = new NpgsqlCommand(sqlGenre, conn);
-                //insertGenre.ExecuteNonQuery();
-                //NpgsqlCommand insertMovies = new NpgsqlCommand(sqlMovies, conn);
-                //insertMovies.ExecuteNonQuery();
-                //NpgsqlCommand insertTv = new NpgsqlCommand(sqlTv, conn);
-                //insertTv.ExecuteNonQuery();
+                NpgsqlCommand createTables = new NpgsqlCommand(sqlTables, conn);
+                createTables.ExecuteNonQuery();
+                NpgsqlCommand insertJobs = new NpgsqlCommand(sqlJobs, conn);
+                insertJobs.ExecuteNonQuery();
+                NpgsqlCommand insertPerson = new NpgsqlCommand(sqlPerson, conn);
+                insertPerson.ExecuteNonQuery();
+                NpgsqlCommand insertGenre = new NpgsqlCommand(sqlGenre, conn);
+                insertGenre.ExecuteNonQuery();
+                NpgsqlCommand insertMovies = new NpgsqlCommand(sqlMovies, conn);
+                insertMovies.ExecuteNonQuery();
+                NpgsqlCommand insertTv = new NpgsqlCommand(sqlTv, conn);
+                insertTv.ExecuteNonQuery();
 
                 //  Gia diavasma kataxoriseon kai provoli sti forma
 
@@ -76,22 +77,35 @@ namespace PostgresConnection
                 //dataTable = dataSet.Tables[0];
                 ////// connect grid to DataTable
                 //dataGridView1.DataSource = dataTable;
+                //conn.Close();
+
+                //  Custom queries
+
+                //string addGnr = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (8, 9, 9)";
+                //ExcecuteInsertQuery(addGnr);
+                //string search = "select coalesce(MAX(genreId), 0 ) from genre where title = 'Documentary'";
+                //conn.Open();
+                //NpgsqlCommand newQuery = new NpgsqlCommand(search, conn);
+                ////newQuery.Parameters.Add(new NpgsqlParameter("genreId", NpgsqlDbType.Integer));
+                //Object genreId = newQuery.ExecuteScalar();
+                //conn.Close();
+                //string search2 = "select movieId from movieCategorization where genreId=" + genreId;
+                //conn.Open();
+                //NpgsqlCommand com = new NpgsqlCommand(search2, conn);
+                //NpgsqlDataReader dRead = com.ExecuteReader();
+                //List<int> movies = new List<int>();
+                //while (dRead.Read())
+                //{
+                //    for (int i = 0; i < dRead.FieldCount; i++)
+                //    {
+                //        movies.Add(int.Parse(dRead[i].ToString()));
+                //    }
+                //}
+                //string moviesrc = "select title from movies where movieId=" + dRead[i];
+                //NpgsqlCommand query = new NpgsqlCommand(moviesrc, conn);
+                //Object movie = newQuery.ExecuteScalar();
+                //movies.Add(movie.ToString());
                 conn.Close();
-
-                //  Custom query
-
-                string addGnr = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (1, 1, 1)";
-                string addGnr2 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (2, 2, 3)";
-                string addGnr3 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (3, 2, 5)";
-                string addGnr4 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (4, 3, 1)";
-                string addGnr5 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (5, 4, 4)";
-                string addGnr6 = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (6, 5, 7)";
-                ExcecuteInsertQuery(addGnr);
-                ExcecuteInsertQuery(addGnr2);
-                ExcecuteInsertQuery(addGnr3);
-                ExcecuteInsertQuery(addGnr4);
-                ExcecuteInsertQuery(addGnr5);
-                ExcecuteInsertQuery(addGnr6);
             }
             catch (Exception msg)
             {
@@ -103,9 +117,25 @@ namespace PostgresConnection
         {
             NpgsqlConnection conn = new NpgsqlConnection(connstring);
             conn.Open();
-
             NpgsqlCommand newQuery = new NpgsqlCommand(sql, conn);
             newQuery.ExecuteNonQuery();
+
+            conn.Close();
+        }
+
+        private void ExcecuteGetQuery(string sql)
+        {
+            NpgsqlConnection conn = new NpgsqlConnection(connstring);
+            conn.Open();
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql, conn);
+      
+            dataSet.Reset();
+            ////// filling DataSet with result from NpgsqlDataAdapter
+            da.Fill(dataSet);
+            ////// since it C# DataSet can handle multiple tables, we will select first
+            dataTable = dataSet.Tables[0];
+            ////// connect grid to DataTable
+            dataGridView1.DataSource = dataTable;
 
             conn.Close();
         }
