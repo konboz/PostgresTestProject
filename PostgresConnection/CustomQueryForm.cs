@@ -23,13 +23,23 @@ namespace PostgresConnection
         {
             if (radioButton1.Checked)
             {
-                //do something
+                var data = QueryService.ViewQuery(richTextBox1.Text);
+
+                if (data != null)
+                {
+                    dataGridView1.DataSource = data;
+                }
+                else
+                {
+                    DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την επικοινωνία με τη βάση!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo);
+                    if (dialog == DialogResult.Yes)
+                    {
+                        var exception = new ExceptionForm();
+                        exception.Show();
+                    }
+                }
             }
             else if (radioButton2.Checked)
-            {
-                //do something
-            }
-            else if (radioButton3.Checked)
             {
                 if (QueryService.InsertQuery(richTextBox1.Text))
                 {

@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,31 @@ namespace PostgresConnection
                 DbException = e.ToString();
                 return false; 
             }  
+        }
+
+        public static DataTable ViewQuery(string sql)  //  Gia diavasma kataxoriseon kai provoli sti forma
+        {
+            DataSet dataSet = new DataSet();
+            DataTable dataTable = new DataTable();
+            dataSet.Reset();
+            try
+            {
+                NpgsqlConnection conn = new NpgsqlConnection(connstring);
+                conn.Open();
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql, conn);
+                ////// filling DataSet with result from NpgsqlDataAdapter
+                da.Fill(dataSet);
+                ////// since it C# DataSet can handle multiple tables, we will select first
+                dataTable = dataSet.Tables[0];
+                conn.Close();
+                return dataTable;
+            }
+            catch (Exception e)
+            {
+                dataTable = null;
+                DbException = e.ToString();
+                return dataTable;
+            }
         }
     }
 }
