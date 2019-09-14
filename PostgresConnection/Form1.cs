@@ -28,56 +28,7 @@ namespace PostgresConnection
         {
             try
             {
-                // Making connection with Npgsql provider
                 NpgsqlConnection conn = new NpgsqlConnection(connstring);
-
-                FileInfo file = new FileInfo("Database/tables.sql");
-                FileInfo file1 = new FileInfo("Database/profession.sql");
-                FileInfo file2 = new FileInfo("Database/person.sql");
-                FileInfo file3 = new FileInfo("Database/genre.sql");
-                FileInfo file4 = new FileInfo("Database/movies.sql");
-                FileInfo file5 = new FileInfo("Database/tvSeries.sql");
-
-                //Loading tables and mock data for basic entities
-                conn.Open();
-
-                //Reading sql from files
-
-                string sqlTables = file.OpenText().ReadToEnd();
-                string sqlJobs = file1.OpenText().ReadToEnd();
-                string sqlPerson = file2.OpenText().ReadToEnd();
-                string sqlGenre = file3.OpenText().ReadToEnd();
-                string sqlMovies = file4.OpenText().ReadToEnd();
-                string sqlTv = file5.OpenText().ReadToEnd();
-
-                ////// Data adapter making request from our connection
-
-                NpgsqlCommand createTables = new NpgsqlCommand(sqlTables, conn);
-                createTables.ExecuteNonQuery();
-                NpgsqlCommand insertJobs = new NpgsqlCommand(sqlJobs, conn);
-                insertJobs.ExecuteNonQuery();
-                NpgsqlCommand insertPerson = new NpgsqlCommand(sqlPerson, conn);
-                insertPerson.ExecuteNonQuery();
-                NpgsqlCommand insertGenre = new NpgsqlCommand(sqlGenre, conn);
-                insertGenre.ExecuteNonQuery();
-                NpgsqlCommand insertMovies = new NpgsqlCommand(sqlMovies, conn);
-                insertMovies.ExecuteNonQuery();
-                NpgsqlCommand insertTv = new NpgsqlCommand(sqlTv, conn);
-                insertTv.ExecuteNonQuery();
-
-                //  Gia diavasma kataxoriseon kai provoli sti forma
-
-                //NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql, conn);
-                //// i always reset DataSet before i do
-                //// something with it.... i don't know why :-)
-                //dataSet.Reset();
-                ////// filling DataSet with result from NpgsqlDataAdapter
-                //da.Fill(dataSet);
-                ////// since it C# DataSet can handle multiple tables, we will select first
-                //dataTable = dataSet.Tables[0];
-                ////// connect grid to DataTable
-                //dataGridView1.DataSource = dataTable;
-                //conn.Close();
 
                 //  Custom queries
 
@@ -105,7 +56,6 @@ namespace PostgresConnection
                 //NpgsqlCommand query = new NpgsqlCommand(moviesrc, conn);
                 //Object movie = newQuery.ExecuteScalar();
                 //movies.Add(movie.ToString());
-                conn.Close();
             }
             catch (Exception msg)
             {
@@ -113,17 +63,29 @@ namespace PostgresConnection
                 throw;
             }
         }
-        private void ExcecuteInsertQuery(string sql)
+        private void InsertQuery(string sqlScript)
         {
             NpgsqlConnection conn = new NpgsqlConnection(connstring);
+            FileInfo file = new FileInfo("Database/" + sqlScript + ".sql");
+            string script = file.OpenText().ReadToEnd();
             conn.Open();
-            NpgsqlCommand newQuery = new NpgsqlCommand(sql, conn);
-            newQuery.ExecuteNonQuery();
-
+            NpgsqlCommand query = new NpgsqlCommand(script, conn);
+            query.ExecuteNonQuery();
             conn.Close();
         }
 
-        private void ExcecuteGetQuery(string sql)
+        private void CreateTables(string sqlScript)
+        {
+            NpgsqlConnection conn = new NpgsqlConnection(connstring);
+            FileInfo file = new FileInfo("Database/" + sqlScript + ".sql");
+            string script = file.OpenText().ReadToEnd();
+            conn.Open();
+            NpgsqlCommand createTables = new NpgsqlCommand(script, conn);
+            createTables.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        private void GetQuery(string sql)  //  Gia diavasma kataxoriseon kai provoli sti forma
         {
             NpgsqlConnection conn = new NpgsqlConnection(connstring);
             conn.Open();
