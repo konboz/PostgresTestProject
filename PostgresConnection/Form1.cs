@@ -29,7 +29,13 @@ namespace PostgresConnection
             try
             {
                 NpgsqlConnection conn = new NpgsqlConnection(connstring);
-                CreateTables("tables");
+                //First run with empty database
+                //CreateTables("tables");
+                //InsertQuery("profession");
+                //InsertQuery("genre");
+                //InsertQuery("movies");
+                //InsertQuery("tvSeries");
+
                 //  Custom queries
 
                 //string addGnr = "insert into movieCategorization (tvCategorizationId, movieId, genreId) values (8, 9, 9)";
