@@ -108,5 +108,12 @@ namespace PostgresConnection
             queryForm.Show();
             Hide();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Movies movies = new Movies(this);
+            movies.Show();
+            Hide();
+        }
     }
 }
