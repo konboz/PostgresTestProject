@@ -22,56 +22,18 @@ namespace PostgresConnection
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
+            string script;
+
+            if (checkBox1.Checked && label1.Text.Length > 0)
             {
-                var data = QueryService.ViewQuery(richTextBox1.Text);
-
-                if (data != null)
-                {
-                    dataGridView1.DataSource = data;
-                }
-                else
-                {
-                    DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την επικοινωνία με τη βάση!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo);
-                    if (dialog == DialogResult.Yes)
-                    {
-                        var exception = new ExceptionForm();
-                        exception.Show();
-                    }
-                }
+                script = label1.Text;
+                FileInfo file = new FileInfo(script);
+                script = file.OpenText().ReadToEnd();
             }
-            else if (radioButton2.Checked)
+            else
             {
-                if (QueryService.InsertQuery(richTextBox1.Text))
-                {
-                    MessageBox.Show("Επιτυχής εισαγωγή δεδομένων!");
-                }
-                else
-                {
-                    DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την εισαγωγή των δεδομένων!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo);
-                    if (dialog == DialogResult.Yes)
-                    {
-                        var exception = new ExceptionForm();
-                        exception.Show();
-                    }
-                }
+                script = richTextBox1.Text;
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            FileInfo file = new FileInfo(openFileDialog1.FileName);
-            string script = file.OpenText().ReadToEnd();
 
             if (radioButton1.Checked)
             {
@@ -107,7 +69,47 @@ namespace PostgresConnection
                     }
                 }
             }
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                label1.Text = openFileDialog1.FileName;
+            }
+            else
+            {
+                label1.Text = null; 
+            }
+        }
+        private void CheckBoxCheckChanged (object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                button3.Visible = true;
+                richTextBox1.ReadOnly = true;
+                button2.Visible = false;
+                label1.Visible = true;
+                textBox1.Visible = true;
+            }
+            else
+            {
+                button3.Visible = false;
+                richTextBox1.ReadOnly = false;
+                button2.Visible = true;
+                label1.Visible = false;
+                textBox1.Visible = false;
+            }
         }
     }
 }
