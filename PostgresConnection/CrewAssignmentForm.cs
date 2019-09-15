@@ -16,6 +16,8 @@ namespace PostgresConnection
         public int id;
         public int personId;
         public int profId;
+
+        //H metavliti isMovie einai gia na xerw se poio pinaka tha paw na kanw tin kataxwrisi, true gia tainia, false gia seira
         public CrewAssignmentForm(bool isMovie, int id)
         {
             InitializeComponent();
