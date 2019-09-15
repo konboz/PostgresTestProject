@@ -32,6 +32,7 @@ namespace PostgresConnection
                 //First run with empty database
                 //CreateTables("tables");
                 //InsertQuery("profession");
+                //InsertQuery("person");
                 //InsertQuery("genre");
                 //InsertQuery("movies");
                 //InsertQuery("tvSeries");

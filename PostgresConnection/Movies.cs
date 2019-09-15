@@ -14,7 +14,7 @@ namespace PostgresConnection
     {
         public Form form;
         public DataGridView data;
-        public string tableName = "movies";
+        public string tableName = "movies"; //isws na mi xreiastei pouthena auto
         public Movies(Form form)
         {
             InitializeComponent();
@@ -23,22 +23,22 @@ namespace PostgresConnection
             DataGridRefresh();
         }
 
-        private void DataGridRefresh()
+        private void DataGridRefresh() // kanei refresh to datagrid otan kanoyme allagi sti vasi, xrhsimopoieitai kai gia tin arxiki fortwsi giauto kaleitai kai apo panw
         {
             DataTable initData;
-            initData = QueryService.ViewQuery("Select * from movies;");
-            if (initData != null)
+            initData = QueryService.ViewQuery("Select * from movies;"); //kalw tin viewQuery apo tin klasi queryservice kai bazw to apotelesma sta initData
+            if (initData != null) // H viewQuery an exei sfalma to epistrefei null to dataGrid
             {
                 dataGridView1.DataSource = initData;
                 data = dataGridView1;
                 dataGridView1.Sort(dataGridView1.Columns["movieid"], ListSortDirection.Ascending);
             }
-            else
+            else //Opote an einai null tou lew na vgalei minima kai na deixei to sfalma
             {
-                DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την επικοινωνία με τη βάση!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo);
+                DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την επικοινωνία με τη βάση!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo); //auti einai i suntaxi an thes to messageBox na einai typou Yes/No
                 if (dialog == DialogResult.Yes)
                 {
-                    var exception = new ExceptionForm();
+                    var exception = new ExceptionForm(); //To mono pou kanei auti i forma einai na diavazei ti metavliti exception pou exei apothikeumeno mesa to teleutaio sfalma, i metavliti orizetai sto queryService
                     exception.Show();
                 }
             }
@@ -46,7 +46,7 @@ namespace PostgresConnection
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            data = sender as DataGridView;
+            data = sender as DataGridView; // to sender einai geniko periexei ola ta dedomena tou datagrid kai to kanw typou datagrid gia na to xrisimopoiiso vazontas to sta data pou thelw na einai autou tou typou
         }
 
         private void RadioButtonChanged(object sender, EventArgs e)
@@ -55,6 +55,11 @@ namespace PostgresConnection
             if (radioButton1.Checked || radioButton2.Checked)
             {
                 groupBox2.Visible = true;
+            }
+            else if (radioButton4.Checked)
+            {
+                button1.Text = "Συνέχεια";
+                groupBox2.Visible = false;
             }
             else
             {
@@ -85,9 +90,11 @@ namespace PostgresConnection
             }
             else if (radioButton2.Checked)
             {
+                // pairnei tis times apo ta textBox kai tis vazei sto string gia na ginei to query
                 string sql = "update movies set title = '" + textTitle.Text + "', releaseDate = '" + dateTimePicker1.Text + "', language = '" + textLang.Text + "', country = '" + textCountry.Text + "', poster = '" + textPoster.Text + "' where movieId = " + data.SelectedRows[0].Cells[0].Value + ";";
 
-                if (QueryService.InsertQuery(sql))
+                // H InsertQuery epistrefei bool an deis stin class queryService, opote kanontas auto tin ektelei kai an einai true to apotelesma bainei mesa, alliws paei sto else kai an patiseis Yes diavazei to sfalma pou apothikeutike
+                if (QueryService.InsertQuery(sql)) 
                 {
                     MessageBox.Show("Επιτυχής εισαγωγή δεδομένων!");
                     DataGridRefresh();
@@ -104,7 +111,8 @@ namespace PostgresConnection
             }
             else if (radioButton3.Checked)
             {
-                string sql = " delete from movies where movieId = " + data.SelectedRows[0].Cells[0].Value + ";";
+                // paei sto datagrid kai paei sthn prwti epilegmeni seira (mia einai etsi k alliws), sto prwto keli kai pairnei tin timi tou, giati ekei einai to id
+                string sql = " delete from movies where movieId = " + data.SelectedRows[0].Cells[0].Value + ";"; 
 
                 if (QueryService.InsertQuery(sql))
                 {
@@ -120,6 +128,13 @@ namespace PostgresConnection
                         exception.Show();
                     }
                 }
+            }
+            else if (radioButton4.Checked)
+            {
+                int movieId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString()); //To Parse einai gia na kanei tin timi stin epilegmeni seira sto epilegmeno keli integer, giati emeis xeroume oti einai int alla o compiler to vlepei san object. ToString kaneis giati parse kaneis se keimeno
+                var crew = new CrewAssignmentForm(true, movieId); //to pername stin forma gia na to xrisimopoiisoume gia tin kataxwrisi ston endiameso pinaka
+                crew.Show();
+                //epitides den kanw hide tin forma auti giati tha xanagyrisoyme otan ginei i kataxwrisi
             }
         }
     }
