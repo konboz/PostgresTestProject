@@ -111,5 +111,11 @@ namespace PostgresConnection
                 textBox1.Visible = false;
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            form.Show();
+            Close();
+        }
     }
 }

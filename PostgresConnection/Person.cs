@@ -137,5 +137,11 @@ namespace PostgresConnection
                 //epitides den kanw hide tin forma auti giati tha xanagyrisoyme otan ginei i kataxwrisi
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            form.Show();
+            Close();
+        }
     }
 }
