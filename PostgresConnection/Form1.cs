@@ -133,7 +133,7 @@ namespace PostgresConnection
         private void button3_Click(object sender, EventArgs e)
         {
             Person person = new Person(this);
-            peson.Show();
+            person.Show();
             Hide();
         }
     }
