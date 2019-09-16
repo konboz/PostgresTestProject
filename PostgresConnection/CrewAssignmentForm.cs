@@ -63,13 +63,16 @@ namespace PostgresConnection
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             label1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            label1.Visible = true;
             personId = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             button1.Visible = true;
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             label2.Text = dataGridView2.SelectedRows[0].Cells[1].Value.ToString();
+            label2.Visible = true;
             profId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
             button1.Visible = true;
         }
