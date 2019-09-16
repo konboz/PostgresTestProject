@@ -122,5 +122,19 @@ namespace PostgresConnection
             movies.Show();
             Hide();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            TvSeries series = new TvSeries(this);
+            series.Show();
+            Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Person person = new Person(this);
+            peson.Show();
+            Hide();
+        }
     }
 }
