@@ -26,8 +26,7 @@ namespace PostgresConnection
 
             if (checkBox1.Checked && label1.Text.Length > 0)
             {
-                script = label1.Text;
-                FileInfo file = new FileInfo(script);
+                FileInfo file = new FileInfo(label1.Text);
                 script = file.OpenText().ReadToEnd();
             }
             else
