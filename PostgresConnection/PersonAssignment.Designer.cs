@@ -64,6 +64,7 @@
             this.button1.TabIndex = 13;
             this.button1.Text = "Καταχώρηση";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -133,6 +134,7 @@
             this.label3.Size = new System.Drawing.Size(51, 16);
             this.label3.TabIndex = 16;
             this.label3.Text = "label3";
+            this.label3.Visible = false;
             // 
             // groupBox1
             // 
@@ -194,6 +196,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "PersonAssignment";
             this.Text = "PersonAssignment";
+            this.Load += new System.EventHandler(this.PersonAssignment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();

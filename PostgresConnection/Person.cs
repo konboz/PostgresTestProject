@@ -132,7 +132,7 @@ namespace PostgresConnection
             else if (radioButton4.Checked)
             {
                 int personId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString()); //To Parse einai gia na kanei tin timi stin epilegmeni seira sto epilegmeno keli integer, giati emeis xeroume oti einai int alla o compiler to vlepei san object. ToString kaneis giati parse kaneis se keimeno
-                var prs = new PersonAssignment(personid); //to pername stin forma gia na to xrisimopoiisoume gia tin kataxwrisi ston endiameso pinaka
+                var prs = new PersonAssignment(personId); //to pername stin forma gia na to xrisimopoiisoume gia tin kataxwrisi ston endiameso pinaka
                 prs.Show();
                 //epitides den kanw hide tin forma auti giati tha xanagyrisoyme otan ginei i kataxwrisi
             }

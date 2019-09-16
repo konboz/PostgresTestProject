@@ -15,8 +15,6 @@ namespace PostgresConnection
         public int id;
         public int personId;
         public int profId;
-        public int movieId;
-        public int tvserieId;
         public PersonAssignment(int id)
         {
             InitializeComponent();
@@ -72,18 +70,72 @@ namespace PostgresConnection
             {
                 DatagridLoad("movies", dataGridView2);
             }
-            else
+            else if(radioButton2.Checked)
             {
-                DatagridLoad("tvseries", dataGridView1);
+                DatagridLoad("tvseries", dataGridView2);
             }
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            label3.Text = dataGridView2.SelectedRows[0].Cells[1].Value.ToString();
-            label3.Visible = true;
-            movieId = int.Parse(dataGridView2.SelectedRows[0].Cells[0].Value.ToString());
-            button1.Visible = true;
+            if(radioButton1.Checked)
+            {
+                label3.Text = dataGridView2.SelectedRows[0].Cells[1].Value.ToString();
+                label3.Visible = true;
+                button1.Visible = true;
+            }
+            else if(radioButton2.Checked)
+            {
+                label3.Text = dataGridView2.SelectedRows[0].Cells[1].Value.ToString();
+                label3.Visible = true;
+                button1.Visible = true;
+            }
+            
+        }
+
+        private void PersonAssignment_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                string sql = "insert into movieAssignment (personid, professionid, movieid) values (" + personId + ", " + profId + ", " + id + ");";
+
+                if (QueryService.InsertQuery(sql))
+                {
+                    MessageBox.Show("Επιτυχής εισαγωγή δεδομένων!");
+                }
+                else
+                {
+                    DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την εισαγωγή των δεδομένων!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo);
+                    if (dialog == DialogResult.Yes)
+                    {
+                        var exception = new ExceptionForm();
+                        exception.Show();
+                    }
+                }
+            }
+            else if (radioButton2.Checked)
+            {
+                string sql = "insert into tvAssignment (personid, professionid, tvserieid) values (" + personId + ", " + profId + ", " + id + ");";
+
+                if (QueryService.InsertQuery(sql))
+                {
+                    MessageBox.Show("Επιτυχής εισαγωγή δεδομένων!");
+                }
+                else
+                {
+                    DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την εισαγωγή των δεδομένων!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo);
+                    if (dialog == DialogResult.Yes)
+                    {
+                        var exception = new ExceptionForm();
+                        exception.Show();
+                    }
+                }
+            }
         }
     }
 }
