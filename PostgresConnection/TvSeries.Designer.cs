@@ -113,6 +113,7 @@
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Ανάθεση δουλειάς";
             this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.RadioButtonChanged);
             // 
             // textTitle
             // 
@@ -133,6 +134,7 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Ενημέρωση";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.RadioButtonChanged);
             // 
             // radioButton1
             // 
@@ -145,6 +147,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Εισαγωγή";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.RadioButtonChanged);
             // 
             // lblRelease
             // 
@@ -238,6 +241,7 @@
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Διαγραφή";
             this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.RadioButtonChanged);
             // 
             // dataGridView1
             // 
