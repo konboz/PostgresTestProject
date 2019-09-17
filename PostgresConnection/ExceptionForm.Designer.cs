@@ -58,7 +58,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "ExceptionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExceptionForm";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }
