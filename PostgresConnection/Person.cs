@@ -15,6 +15,7 @@ namespace PostgresConnection
         public Form form;
         public DataGridView data;
         public string tableName = "person";
+        public int profId;
         public Person(Form form)
         {
             InitializeComponent();
@@ -73,7 +74,7 @@ namespace PostgresConnection
         {
             if (radioButton1.Checked)
             {
-                string sql = "insert into person (name, dateofbirth, country, profilepic) values ('" + textTitle.Text + "', '" + dateTimePicker1.Text + "', '" + "', '" + textCountry.Text + "', '" + textPoster.Text + "');";
+                string sql = "insert into person (name, dateofbirth, country, contactinfo, profilepic, primaryprofessionid) values ('" + textName.Text + "', '" + dateTimePicker1.Text + "', '" + textCountry.Text + "', '" + textContact.Text + "', '" + textPoster.Text + "', " + profId + ");";
 
                 if (QueryService.InsertQuery(sql))
                 {
@@ -93,7 +94,7 @@ namespace PostgresConnection
             else if (radioButton2.Checked)
             {
                 // pairnei tis times apo ta textBox kai tis vazei sto string gia na ginei to query
-                string sql = "update person set name = '" + textTitle.Text + "', dateofbirth = '" + dateTimePicker1.Text + "', country = '" + textCountry.Text + "', poster = '" + textPoster.Text + "' where personId = " + data.SelectedRows[0].Cells[0].Value + ";";
+                string sql = "update person set name = '" + textName.Text + "', dateofbirth = '" + dateTimePicker1.Text + "', contactinfo = '" + textContact.Text + "', country = '" + textCountry.Text + "', poster = '" + textPoster.Text + "', primaryprofessionid = " + profId + " where personId = " + data.SelectedRows[0].Cells[0].Value + ";";
 
                 // H InsertQuery epistrefei bool an deis stin class queryService, opote kanontas auto tin ektelei kai an einai true to apotelesma bainei mesa, alliws paei sto else kai an patiseis Yes diavazei to sfalma pou apothikeutike
                 if (QueryService.InsertQuery(sql))
@@ -156,6 +157,18 @@ namespace PostgresConnection
             int personId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString());
             Filmography filmography = new Filmography(personId);
             filmography.Show();
+        }
+
+        private void textProf_Enter(object sender, EventArgs e)
+        {
+            ProfessionForm prof = new ProfessionForm(this);
+            prof.Show();
+        }
+
+        public void ProfessionSelected(string title, int id)
+        {
+            textProf.Text = title;
+            profId = id;
         }
     }
 }

@@ -55,14 +55,14 @@ namespace PostgresConnection
             {
                 label1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
                 label1.Visible = true;
-                movieId = int.Parse(dataGridView3.SelectedRows[0].Cells[0].Value.ToString());
+                movieId = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
                 button1.Visible = true;
             }
             else if (radioButton2.Checked)
             {
                 label1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
                 label1.Visible = true;
-                tvserieId = int.Parse(dataGridView3.SelectedRows[0].Cells[0].Value.ToString());
+                tvserieId = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
                 button1.Visible = true;
             }
         }

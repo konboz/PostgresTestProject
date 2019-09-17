@@ -35,7 +35,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblPoster = new System.Windows.Forms.Label();
             this.textPoster = new System.Windows.Forms.TextBox();
-            this.textTitle = new System.Windows.Forms.TextBox();
+            this.textName = new System.Windows.Forms.TextBox();
             this.lblCountry = new System.Windows.Forms.Label();
             this.textCountry = new System.Windows.Forms.TextBox();
             this.lblRelease = new System.Windows.Forms.Label();
@@ -48,6 +48,10 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.lblinfo = new System.Windows.Forms.Label();
+            this.textContact = new System.Windows.Forms.TextBox();
+            this.lblProf = new System.Windows.Forms.Label();
+            this.textProf = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -85,17 +89,21 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblProf);
+            this.groupBox2.Controls.Add(this.textProf);
+            this.groupBox2.Controls.Add(this.lblinfo);
+            this.groupBox2.Controls.Add(this.textContact);
             this.groupBox2.Controls.Add(this.dateTimePicker1);
             this.groupBox2.Controls.Add(this.lblTitle);
             this.groupBox2.Controls.Add(this.lblPoster);
             this.groupBox2.Controls.Add(this.textPoster);
-            this.groupBox2.Controls.Add(this.textTitle);
+            this.groupBox2.Controls.Add(this.textName);
             this.groupBox2.Controls.Add(this.lblCountry);
             this.groupBox2.Controls.Add(this.textCountry);
             this.groupBox2.Controls.Add(this.lblRelease);
             this.groupBox2.Location = new System.Drawing.Point(223, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(547, 165);
+            this.groupBox2.Size = new System.Drawing.Size(538, 200);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Εισαγωγή στοιχείων";
@@ -105,10 +113,10 @@
             // 
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(166, 49);
+            this.dateTimePicker1.Location = new System.Drawing.Point(168, 48);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.RightToLeftLayout = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(332, 21);
+            this.dateTimePicker1.Size = new System.Drawing.Size(330, 21);
             this.dateTimePicker1.TabIndex = 16;
             // 
             // lblTitle
@@ -125,7 +133,7 @@
             // 
             this.lblPoster.AutoSize = true;
             this.lblPoster.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblPoster.Location = new System.Drawing.Point(6, 115);
+            this.lblPoster.Location = new System.Drawing.Point(6, 144);
             this.lblPoster.Name = "lblPoster";
             this.lblPoster.Size = new System.Drawing.Size(142, 15);
             this.lblPoster.TabIndex = 13;
@@ -133,17 +141,17 @@
             // 
             // textPoster
             // 
-            this.textPoster.Location = new System.Drawing.Point(154, 111);
+            this.textPoster.Location = new System.Drawing.Point(154, 141);
             this.textPoster.Name = "textPoster";
             this.textPoster.Size = new System.Drawing.Size(344, 21);
             this.textPoster.TabIndex = 14;
             // 
-            // textTitle
+            // textName
             // 
-            this.textTitle.Location = new System.Drawing.Point(63, 22);
-            this.textTitle.Name = "textTitle";
-            this.textTitle.Size = new System.Drawing.Size(435, 21);
-            this.textTitle.TabIndex = 6;
+            this.textName.Location = new System.Drawing.Point(63, 22);
+            this.textName.Name = "textName";
+            this.textName.Size = new System.Drawing.Size(435, 21);
+            this.textName.TabIndex = 6;
             // 
             // lblCountry
             // 
@@ -166,7 +174,7 @@
             // 
             this.lblRelease.AutoSize = true;
             this.lblRelease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblRelease.Location = new System.Drawing.Point(4, 49);
+            this.lblRelease.Location = new System.Drawing.Point(6, 48);
             this.lblRelease.Name = "lblRelease";
             this.lblRelease.Size = new System.Drawing.Size(144, 15);
             this.lblRelease.TabIndex = 7;
@@ -278,6 +286,41 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // lblinfo
+            // 
+            this.lblinfo.AutoSize = true;
+            this.lblinfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblinfo.Location = new System.Drawing.Point(6, 117);
+            this.lblinfo.Name = "lblinfo";
+            this.lblinfo.Size = new System.Drawing.Size(146, 15);
+            this.lblinfo.TabIndex = 17;
+            this.lblinfo.Text = "Στοιχεία επικοινωνίας:";
+            // 
+            // textContact
+            // 
+            this.textContact.Location = new System.Drawing.Point(158, 114);
+            this.textContact.Name = "textContact";
+            this.textContact.Size = new System.Drawing.Size(340, 21);
+            this.textContact.TabIndex = 18;
+            // 
+            // lblProf
+            // 
+            this.lblProf.AutoSize = true;
+            this.lblProf.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblProf.Location = new System.Drawing.Point(6, 171);
+            this.lblProf.Name = "lblProf";
+            this.lblProf.Size = new System.Drawing.Size(104, 15);
+            this.lblProf.TabIndex = 19;
+            this.lblProf.Text = "Κύρια ιδιότητα:";
+            // 
+            // textProf
+            // 
+            this.textProf.Location = new System.Drawing.Point(116, 168);
+            this.textProf.Name = "textProf";
+            this.textProf.Size = new System.Drawing.Size(382, 21);
+            this.textProf.TabIndex = 20;
+            this.textProf.Enter += new System.EventHandler(this.textProf_Enter);
+            // 
             // Person
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,7 +353,7 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblPoster;
         private System.Windows.Forms.TextBox textPoster;
-        private System.Windows.Forms.TextBox textTitle;
+        private System.Windows.Forms.TextBox textName;
         private System.Windows.Forms.Label lblCountry;
         private System.Windows.Forms.TextBox textCountry;
         private System.Windows.Forms.Label lblRelease;
@@ -323,5 +366,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label lblinfo;
+        private System.Windows.Forms.TextBox textContact;
+        private System.Windows.Forms.Label lblProf;
+        private System.Windows.Forms.TextBox textProf;
     }
 }
