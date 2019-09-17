@@ -13,13 +13,16 @@ namespace PostgresConnection
     public partial class PersonAssignment : Form
     {
         public int id;
+        public int movieId;
+        public int tvserieId;
         public int personId;
         public int profId;
         public PersonAssignment(int id)
         {
             InitializeComponent();
-            DatagridLoad("person", dataGridView1);
             DatagridLoad("profession", dataGridView3);
+            this.movieId = movieId;
+            this.tvserieId = tvserieId;
             this.id = id;
             button1.Visible = false;
         }
@@ -50,10 +53,20 @@ namespace PostgresConnection
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            label1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-            label1.Visible = true;
-            personId = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            button1.Visible = true;
+            if (radioButton1.Checked)
+            {
+                label1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                label1.Visible = true;
+                movieId = int.Parse(dataGridView3.SelectedRows[0].Cells[0].Value.ToString());
+                button1.Visible = true;
+            }
+            else if (radioButton2.Checked)
+            {
+                label1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                label1.Visible = true;
+                tvserieId = int.Parse(dataGridView3.SelectedRows[0].Cells[0].Value.ToString());
+                button1.Visible = true;
+            }
         }
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -68,28 +81,17 @@ namespace PostgresConnection
         {
             if(radioButton1.Checked)
             {
-                DatagridLoad("movies", dataGridView2);
+                DatagridLoad("movies", dataGridView1);
             }
             else if(radioButton2.Checked)
             {
-                DatagridLoad("tvseries", dataGridView2);
+                DatagridLoad("tvseries", dataGridView1);
             }
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(radioButton1.Checked)
-            {
-                label3.Text = dataGridView2.SelectedRows[0].Cells[1].Value.ToString();
-                label3.Visible = true;
-                button1.Visible = true;
-            }
-            else if(radioButton2.Checked)
-            {
-                label3.Text = dataGridView2.SelectedRows[0].Cells[1].Value.ToString();
-                label3.Visible = true;
-                button1.Visible = true;
-            }
+            
             
         }
 
@@ -102,7 +104,7 @@ namespace PostgresConnection
         {
             if (radioButton1.Checked)
             {
-                string sql = "insert into movieAssignment (personid, professionid, movieid) values (" + personId + ", " + profId + ", " + id + ");";
+                string sql = "insert into movieAssignment (personid, professionid, movieid) values (" + personId + ", " + profId + ", " + movieId + ");";
 
                 if (QueryService.InsertQuery(sql))
                 {
@@ -120,7 +122,7 @@ namespace PostgresConnection
             }
             else if (radioButton2.Checked)
             {
-                string sql = "insert into tvAssignment (personid, professionid, tvserieid) values (" + personId + ", " + profId + ", " + id + ");";
+                string sql = "insert into tvAssignment (personid, professionid, tvserieid) values (" + personId + ", " + profId + ", " + tvserieId + ");";
 
                 if (QueryService.InsertQuery(sql))
                 {
