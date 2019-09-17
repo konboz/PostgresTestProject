@@ -12,36 +12,34 @@ namespace PostgresConnection
 {
     public partial class PersonAssignment : Form
     {
-        public int id;
+        public int personId;
         public int movieId;
         public int tvserieId;
-        public int personId;
         public int profId;
+
         public PersonAssignment(int id)
         {
             InitializeComponent();
             DatagridLoad("profession", dataGridView3);
-            this.movieId = movieId;
-            this.tvserieId = tvserieId;
-            this.id = id;
+            this.personId = id;
             button1.Visible = false;
         }
 
-        public void DatagridLoad(string table, DataGridView dataGrid)
+        //Fills dataGrid with data from given table
+        public void DatagridLoad(string table, DataGridView dataGrid) 
         {
             DataTable initData;
-            initData = QueryService.ViewQuery("Select * from " + table + ";"); //kalw tin viewQuery apo tin klasi queryservice kai bazw to apotelesma sta initData
-            if (initData != null) // H viewQuery an exei sfalma to epistrefei null to dataGrid
+            initData = QueryService.ViewQuery("Select * from " + table + ";");
+            if (initData != null)
             {
                 dataGrid.DataSource = initData;
             }
-            else //Opote an einai null tou lew na vgalei minima kai na deixei to sfalma
+            else
             {
-                DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την επικοινωνία με τη βάση!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo); //auti einai i suntaxi an thes to messageBox na einai typou Yes/No
+                DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την επικοινωνία με τη βάση!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo);
                 if (dialog == DialogResult.Yes)
                 {
-                    var exception = new ExceptionForm(); //To mono pou kanei auti i forma einai na diavazei ti metavliti exception pou exei apothikeumeno mesa to teleutaio sfalma, i metavliti orizetai sto queryService
-                    exception.Show();
+                    var exception = new ExceptionForm(); 
                 }
             }
         }
@@ -87,12 +85,6 @@ namespace PostgresConnection
             {
                 DatagridLoad("tvseries", dataGridView1);
             }
-        }
-
-        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-            
         }
 
         private void PersonAssignment_Load(object sender, EventArgs e)

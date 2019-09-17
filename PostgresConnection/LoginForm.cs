@@ -17,6 +17,8 @@ namespace PostgresConnection
         {
             InitializeComponent();
             this.form = form;
+            textBox1.Text = "test";
+            textBox2.Text = "passw0rd";
         }
 
         private void button1_Click(object sender, EventArgs e)
