@@ -150,5 +150,12 @@ namespace PostgresConnection
         {
             Application.Exit();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int personId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString());
+            Filmography filmography = new Filmography(personId);
+            filmography.Show();
+        }
     }
 }
