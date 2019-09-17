@@ -55,6 +55,7 @@ namespace PostgresConnection
             if (radioButton1.Checked || radioButton2.Checked)
             {
                 groupBox2.Visible = true;
+                button1.Text = "Ok";
             }
             else if (radioButton4.Checked)
             {
@@ -64,6 +65,7 @@ namespace PostgresConnection
             else
             {
                 groupBox2.Visible = false;
+                button1.Text = "Ok";
             }
         }
 
