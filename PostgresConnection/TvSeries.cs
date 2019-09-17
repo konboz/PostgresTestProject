@@ -145,5 +145,17 @@ namespace PostgresConnection
             form.Show();
             Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int tvserieId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString());
+            CrewForm crew = new CrewForm(tvserieId, false);
+            crew.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

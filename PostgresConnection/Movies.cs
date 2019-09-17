@@ -46,7 +46,7 @@ namespace PostgresConnection
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            data = sender as DataGridView; // to sender einai geniko periexei ola ta dedomena tou datagrid kai to kanw typou datagrid gia na to xrisimopoiiso vazontas to sta data pou thelw na einai autou tou typou
+            data = sender as DataGridView;
         }
 
         private void RadioButtonChanged(object sender, EventArgs e)
@@ -144,6 +144,18 @@ namespace PostgresConnection
         {
             form.Show();
             Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int movieId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString());
+            CrewForm crew = new CrewForm(movieId, true);
+            crew.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

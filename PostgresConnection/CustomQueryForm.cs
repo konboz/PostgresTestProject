@@ -116,5 +116,10 @@ namespace PostgresConnection
             form.Show();
             Close();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
