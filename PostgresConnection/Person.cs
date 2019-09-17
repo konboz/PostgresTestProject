@@ -24,27 +24,29 @@ namespace PostgresConnection
             DataGridRefresh();
         }
 
-        private void DataGridRefresh() // kanei refresh to datagrid otan kanoyme allagi sti vasi, xrhsimopoieitai kai gia tin arxiki fortwsi giauto kaleitai kai apo panw
+        //initialy loads the grid and also refreshes it when there is a change in the table
+        private void DataGridRefresh() 
         {
             DataTable initData;
-            initData = QueryService.ViewQuery("Select * from person;"); //kalw tin viewQuery apo tin klasi queryservice kai bazw to apotelesma sta initData
-            if (initData != null) // H viewQuery an exei sfalma to epistrefei null to dataGrid
+            initData = QueryService.ViewQuery("Select * from person;");
+            if (initData != null)
             {
                 dataGridView1.DataSource = initData;
                 data = dataGridView1;
                 dataGridView1.Sort(dataGridView1.Columns["personid"], ListSortDirection.Ascending);
             }
-            else //Opote an einai null tou lew na vgalei minima kai na deixei to sfalma
+            else
             {
-                DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την επικοινωνία με τη βάση!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo); //auti einai i suntaxi an thes to messageBox na einai typou Yes/No
+                DialogResult dialog = MessageBox.Show("Παρουσιάστηκε σφάλμα κατά την επικοινωνία με τη βάση!\nΠροβολή σφάλματος;", "Σφάλμα", MessageBoxButtons.YesNo);
                 if (dialog == DialogResult.Yes)
                 {
-                    var exception = new ExceptionForm(); //To mono pou kanei auti i forma einai na diavazei ti metavliti exception pou exei apothikeumeno mesa to teleutaio sfalma, i metavliti orizetai sto queryService
+                    var exception = new ExceptionForm();
                     exception.Show();
                 }
             }
         }
 
+        //assigning selected row data for use in the sql query
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             data = sender as DataGridView;
@@ -93,10 +95,8 @@ namespace PostgresConnection
             }
             else if (radioButton2.Checked)
             {
-                // pairnei tis times apo ta textBox kai tis vazei sto string gia na ginei to query
                 string sql = "update person set name = '" + textName.Text + "', dateofbirth = '" + dateTimePicker1.Text + "', contactinfo = '" + textContact.Text + "', country = '" + textCountry.Text + "', poster = '" + textPoster.Text + "', primaryprofessionid = " + profId + " where personId = " + data.SelectedRows[0].Cells[0].Value + ";";
 
-                // H InsertQuery epistrefei bool an deis stin class queryService, opote kanontas auto tin ektelei kai an einai true to apotelesma bainei mesa, alliws paei sto else kai an patiseis Yes diavazei to sfalma pou apothikeutike
                 if (QueryService.InsertQuery(sql))
                 {
                     MessageBox.Show("Επιτυχής εισαγωγή δεδομένων!");
@@ -114,7 +114,6 @@ namespace PostgresConnection
             }
             else if (radioButton3.Checked)
             {
-                // paei sto datagrid kai paei sthn prwti epilegmeni seira (mia einai etsi k alliws), sto prwto keli kai pairnei tin timi tou, giati ekei einai to id
                 string sql = " delete from person where personId = " + data.SelectedRows[0].Cells[0].Value + ";";
 
                 if (QueryService.InsertQuery(sql))
@@ -134,10 +133,9 @@ namespace PostgresConnection
             }
             else if (radioButton4.Checked)
             {
-                int personId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString()); //To Parse einai gia na kanei tin timi stin epilegmeni seira sto epilegmeno keli integer, giati emeis xeroume oti einai int alla o compiler to vlepei san object. ToString kaneis giati parse kaneis se keimeno
-                var prs = new PersonAssignment(personId); //to pername stin forma gia na to xrisimopoiisoume gia tin kataxwrisi ston endiameso pinaka
+                int personId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString()); 
+                var prs = new PersonAssignment(personId); 
                 prs.Show();
-                //epitides den kanw hide tin forma auti giati tha xanagyrisoyme otan ginei i kataxwrisi
             }
         }
 

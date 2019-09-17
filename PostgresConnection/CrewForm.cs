@@ -12,7 +12,7 @@ namespace PostgresConnection
 {
     public partial class CrewForm : Form
     {
-        public bool isMovie;
+        public bool isMovie;    //True if it's a movie, false if it isn't
         public int id;
         public CrewForm(int id, bool isMovie)
         {

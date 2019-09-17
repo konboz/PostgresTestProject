@@ -44,6 +44,7 @@ namespace PostgresConnection
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //passing selected profession back to the parent form
             string title = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
             int profId = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             person.ProfessionSelected(title, profId);

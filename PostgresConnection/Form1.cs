@@ -57,6 +57,7 @@ namespace PostgresConnection
         {
             try
             {
+                //Creating tables and filling them with dummy data from sql script files
                 QueryService.InsertQueryFromFile("tables");
                 QueryService.InsertQueryFromFile("movies");
                 QueryService.InsertQueryFromFile("tvSeries");

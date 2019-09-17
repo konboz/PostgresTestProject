@@ -23,7 +23,7 @@ namespace PostgresConnection
         private void button1_Click(object sender, EventArgs e)
         {
             string script;
-
+            //the sql string is stored in the script variable through text reading from a file or the form textBox 
             if (checkBox1.Checked && label1.Text.Length > 0)
             {
                 FileInfo file = new FileInfo(label1.Text);
@@ -33,7 +33,7 @@ namespace PostgresConnection
             {
                 script = richTextBox1.Text;
             }
-
+            //select queries
             if (radioButton1.Checked)
             {
                 var data = QueryService.ViewQuery(script);
@@ -52,6 +52,7 @@ namespace PostgresConnection
                     }
                 }
             }
+            //insert/update/delete queries
             else if (radioButton2.Checked)
             {
                 if (QueryService.InsertQuery(script))
