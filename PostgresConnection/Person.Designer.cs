@@ -266,6 +266,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Person";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Person";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

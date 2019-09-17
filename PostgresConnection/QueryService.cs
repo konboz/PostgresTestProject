@@ -14,7 +14,8 @@ namespace PostgresConnection
     //alla apti stigmi pou de xreiazetai constructor kai apla exei mesa methodous pou ekteloun standar pragmata voleuei to static
     public static class QueryService
     {
-        static string connstring = "Server=localhost;Port=5432;Database=test;User ID=postgres;Password=passw0rd;";
+        public static string connstring;
+        //public static string connstring = "Server=localhost;Port=5432;Database=test;User ID=postgres;Password=passw0rd;";
         public static string DbException; // edw apothikeuoun oi methodoi to sfalma an iparxei
 
         public static void InsertQueryFromFile(string sqlScript) //Idia douleia me apo katw apla diavazei apo arxeio to script

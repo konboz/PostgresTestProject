@@ -57,7 +57,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(356, 206);
+            this.button3.Location = new System.Drawing.Point(389, 206);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(83, 30);
             this.button3.TabIndex = 7;
@@ -67,7 +67,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(647, 76);
+            this.button4.Location = new System.Drawing.Point(652, 76);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(83, 30);
             this.button4.TabIndex = 8;
@@ -98,6 +98,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Αρχική φόρμα";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

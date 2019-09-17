@@ -17,24 +17,14 @@ namespace PostgresConnection
     {
         private DataSet dataSet = new DataSet();
         private DataTable dataTable = new DataTable();
-        // PostgeSQL-style connection string
-        string connstring = "Server=localhost;Port=5432;Database=test;User ID=postgres;Password=passw0rd;";
         public Form1()
         {
             InitializeComponent();
+            this.Visible = false;
+            LoginForm login = new LoginForm(this);
+            login.Show();
         }
    
-        private void InsertQuery(string sqlScript)
-        {
-            NpgsqlConnection conn = new NpgsqlConnection(connstring);
-            FileInfo file = new FileInfo("Database/" + sqlScript + ".sql");
-            string script = file.OpenText().ReadToEnd();
-            conn.Open();
-            NpgsqlCommand query = new NpgsqlCommand(script, conn);
-            query.ExecuteNonQuery();
-            conn.Close();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             CustomQueryForm queryForm = new CustomQueryForm(this);
@@ -65,12 +55,24 @@ namespace PostgresConnection
 
         private void button5_Click(object sender, EventArgs e)
         {
-            QueryService.InsertQueryFromFile("tables");
-            QueryService.InsertQueryFromFile("movies");
-            QueryService.InsertQueryFromFile("tvSeries");
-            QueryService.InsertQueryFromFile("genre");
-            QueryService.InsertQueryFromFile("profession");
-            QueryService.InsertQueryFromFile("person");
+            try
+            {
+                QueryService.InsertQueryFromFile("tables");
+                QueryService.InsertQueryFromFile("movies");
+                QueryService.InsertQueryFromFile("tvSeries");
+                QueryService.InsertQueryFromFile("genre");
+                QueryService.InsertQueryFromFile("profession");
+                QueryService.InsertQueryFromFile("person");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
