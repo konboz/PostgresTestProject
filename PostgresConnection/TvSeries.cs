@@ -57,7 +57,7 @@ namespace PostgresConnection
                 groupBox2.Visible = true;
                 button1.Text = "Ok";
             }
-            else if (radioButton4.Checked)
+            else if (radioButton4.Checked || radioButton5.Checked)
             {
                 button1.Text = "Συνέχεια";
                 groupBox2.Visible = false;
@@ -112,10 +112,11 @@ namespace PostgresConnection
             else if (radioButton3.Checked)
             {
                 // paei sto datagrid kai paei sthn prwti epilegmeni seira (mia einai etsi k alliws), sto prwto keli kai pairnei tin timi tou, giati ekei einai to id
-                string sql1 = " delete from tvassignment where tvserieid = " + data.SelectedRows[0].Cells[0].Value + ";";
-                string sql2 = " delete from tvseries where tvserieId = " + data.SelectedRows[0].Cells[0].Value + ";";
+                string sql1 = " delete from tvcategorization where tvserieid = " + data.SelectedRows[0].Cells[0].Value + ";";
+                string sql2 = " delete from tvassignment where tvserieid = " + data.SelectedRows[0].Cells[0].Value + ";";
+                string sql3 = " delete from tvseries where tvserieId = " + data.SelectedRows[0].Cells[0].Value + ";";
 
-                if (QueryService.InsertQuery(sql1) & QueryService.InsertQuery(sql1))
+                if (QueryService.InsertQuery(sql1) & QueryService.InsertQuery(sql2) & QueryService.InsertQuery(sql3))
                 {
                     MessageBox.Show("Επιτυχής διαγραφή!");
                     DataGridRefresh();
@@ -135,6 +136,12 @@ namespace PostgresConnection
                 int tvserieId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString());
                 var crew = new CrewAssignmentForm(false, tvserieId); //passing id to the next form to be used in the sql command, false is passed because it's not a movie
                 crew.Show();
+            }
+            else if (radioButton5.Checked)
+            {
+                int tvserieId = int.Parse(data.SelectedRows[0].Cells[0].Value.ToString());
+                var genre = new GenreAssign(false, tvserieId); //passing id to the next form to be used in the sql command, false is passed because it's not a movie
+                genre.Show();
             }
         }
 
