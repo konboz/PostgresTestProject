@@ -17,7 +17,7 @@ namespace PostgresConnection
         {
             InitializeComponent();
             this.form = form;
-            //textBox1.Text = "project";
+            textBox1.Text = "project";
             //textBox2.Text = "passw0rd";
         }
 

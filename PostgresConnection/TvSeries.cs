@@ -112,9 +112,10 @@ namespace PostgresConnection
             else if (radioButton3.Checked)
             {
                 // paei sto datagrid kai paei sthn prwti epilegmeni seira (mia einai etsi k alliws), sto prwto keli kai pairnei tin timi tou, giati ekei einai to id
-                string sql = " delete from tvseries where tvserieId = " + data.SelectedRows[0].Cells[0].Value + ";";
+                string sql1 = " delete from tvassignment where tvserieid = " + data.SelectedRows[0].Cells[0].Value + ";";
+                string sql2 = " delete from tvseries where tvserieId = " + data.SelectedRows[0].Cells[0].Value + ";";
 
-                if (QueryService.InsertQuery(sql))
+                if (QueryService.InsertQuery(sql1) & QueryService.InsertQuery(sql1))
                 {
                     MessageBox.Show("Επιτυχής διαγραφή!");
                     DataGridRefresh();

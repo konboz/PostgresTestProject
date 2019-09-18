@@ -114,9 +114,12 @@ namespace PostgresConnection
             }
             else if (radioButton3.Checked)
             {
-                string sql = " delete from person where personId = " + data.SelectedRows[0].Cells[0].Value + ";";
+                //First deleting relations of person in other tables
+                string sql1 = " delete from movieassignment where personId = " + data.SelectedRows[0].Cells[0].Value + ";";
+                string sql2 = " delete from tvassignment where personId = " + data.SelectedRows[0].Cells[0].Value + ";";
+                string sql3 = " delete from person where personId = " + data.SelectedRows[0].Cells[0].Value + ";";
 
-                if (QueryService.InsertQuery(sql))
+                if (QueryService.InsertQuery(sql1) & QueryService.InsertQuery(sql2) & QueryService.InsertQuery(sql3))
                 {
                     MessageBox.Show("Επιτυχής διαγραφή!");
                     DataGridRefresh();
